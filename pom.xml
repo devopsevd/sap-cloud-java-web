@@ -19,7 +19,7 @@
 
     <properties>
         <!-- Properties that hold information on the location, version and plugin of the SAP Cloud Platform SDK for Neo environment -->
-        <sap.cloud.sdk.path>${project.basedir}/../..</sap.cloud.sdk.path>
+        <sap.cloud.sdk.path>${project.build.directory}/sdk</sap.cloud.sdk.path>
         <sap.cloud.sdk.version>3.58.10.1</sap.cloud.sdk.version>
         <sap.cloud.sdk.plugin>neo-java-web-maven-plugin</sap.cloud.sdk.plugin>
 
@@ -121,15 +121,19 @@
     </dependencies>
 
     <modules>
+<!-- 
         <module>authentication</module>
         <module>connectivity</module>
         <module>document-store</module>
+         -->
         <module>explore-ui5</module>
+<!-- 
         <module>hello-world</module>
         <module>mail</module>
         <module>persistence-with-jdbc</module>
         <module>persistence-with-jpa</module>
         <module>websocket</module>
+         -->
     </modules>
 
     <build>
@@ -373,6 +377,13 @@
                         <groupId>com.sap.cloud</groupId>
                         <artifactId>${sap.cloud.sdk.plugin}</artifactId>
                         <executions>
+                            <execution>
+                                <id>cloud-install-sdk</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>install-sdk</goal>
+                                </goals>
+                            </execution>
                             <execution>
                                 <id>cleanup-cloud-application</id>
                                 <phase>pre-integration-test</phase>
